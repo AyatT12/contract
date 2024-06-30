@@ -1,0 +1,108 @@
+html : 
+          <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+                            <div class="modal fade" id="signaturePopupModal" tabindex="-1"
+                                aria-labelledby="signaturePopupModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered d-flex justify-content-center">
+                                    <div class="modal-content signature-modal-content pt-5 pb-5">
+                                        <div class="modal-body signature">
+                                            <div style="  display: flex; flex-direction: column ;gap: 30px;">
+                                                <button type="button" class="check-btn"
+                                                    onclick="OpenHandSignPopup()">باستخدام الجهاز
+                                                    اللوحي(التابلت)</button>
+                                                <button type="button" class="check-btn" onclick="OpenPicSignPopup()">رفع
+                                                    صورة التوقيع</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+                            <div class="modal fade" id="handsignatureModal" tabindex="-1"
+                                aria-labelledby="handsignaturPopupModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered d-flex justify-content-center">
+                                    <div class="modal-content handsignature-modal-content pt-5 pb-2">
+                                        <div class="modal-body handsignature">
+                                            <canvas id="canvas" width="200" height="200" class="mb-2"></canvas>
+                                            <br>
+                                           <div class="row mt-2">
+                                            <div class="col-md-6">
+                                                <button id="save" class="check-btn" >قبول
+                                                    التوقيع</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                
+                                                <button id="clear" class="check-btn ">اعادة التوقيع</button>
+                                             
+                                            </div>
+                                           </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+js : 
+// // ///////////////////////////////////////////////////////////////////////////////////
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+// Variables for drawing
+var drawing = false;
+var prevX = 0;
+var prevY = 0;
+var currX = 0;
+var currY = 0;
+
+// Draw a line between the previous point and the current point
+function drawLine(x0, y0, x1, y1) {
+	ctx.beginPath();
+	ctx.moveTo(x0, y0);
+	ctx.lineTo(x1, y1);
+	ctx.stroke();
+	ctx.closePath();
+}
+
+// Add event listeners to handle mouse events
+canvas.addEventListener('mousedown', function (e) {
+	drawing = true;
+	prevX = e.clientX - canvas.getBoundingClientRect().left;
+	prevY = e.clientY - canvas.getBoundingClientRect().top;
+});
+
+canvas.addEventListener('mousemove', function (e) {
+	if (!drawing) return;
+	currX = e.clientX - canvas.getBoundingClientRect().left;
+	currY = e.clientY - canvas.getBoundingClientRect().top;
+	drawLine(prevX, prevY, currX, currY);
+	prevX = currX;
+	prevY = currY;
+});
+
+canvas.addEventListener('mouseup', function () {
+	drawing = false;
+});
+
+// Clear the canvas
+function clearCanvas() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+document.getElementById('clear').addEventListener('click', function () {
+	clearCanvas();
+});
+
+// Save the canvas as an image
+function saveCanvas() {
+	var dataURL = canvas.toDataURL();
+	var link = document.createElement('a');
+	// link.download = 'signature.png';
+	// link.click();
+	link.href = dataURL;
+	console.log(link.href)
+}
+
+document.getElementById('save').addEventListener('click', function () {
+	saveCanvas();
+	$('#handsignatureModal').modal('hide');
+});

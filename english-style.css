@@ -1,0 +1,264 @@
+body{
+    direction: rtl;
+}
+.form-card {
+    padding: 37px 30px 61px 12px;
+}
+.form-card7{
+    padding: 20px 10px 10px 1px;
+}
+.form-check label {
+    margin-left: 20px;
+}
+.radio-style{
+ text-align: center;   
+}
+
+#progressbar #tenant:after{
+    left:50%
+}
+#progressbar #payment:after{
+    width: 60%;
+    left: 0%;
+}
+.cancle-icon {
+   
+    margin-right: 25px;
+}
+.button-card img{
+    transform: rotateY(180deg);
+}
+.radio-style{
+    padding-left: 45px;
+    padding-right: 0px;
+}
+.col-7{justify-content: flex-end;
+    display: flex;
+    padding-left: 20px;
+}
+
+.car-catogeries {
+    padding-right: 30px;
+    padding-left: 0px;
+}
+.scrollable-content{
+    padding-right: 20px !important;
+}
+.table-bordered thead .value-tabel-header {
+   border-left:1px solid #ff9626a3
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  */
+/* /////////////////////media for the seacrh icon list on mobiles///////////////////////// */
+@media (max-width:575px) {
+  
+.dropdown-content {
+    left: 50%;
+    right: 0%;
+    transform: translateX(90%);
+}
+
+.payment-dropdown-content {
+    right: 180px;
+    transform: translateX(90%);
+}
+}
+@media (max-width: 320px){
+.payment-dropdown-content {
+    right: 220px;
+    transform: translateX(90%);
+}}
+
+/* ****************media****************** */
+@media (max-width: 320px) {
+
+    .form-select-last{
+        width: 95px;
+    }
+
+}
+@media (max-width: 375px) {
+
+    .extra-small-mobile {
+        display: none;
+    }
+
+}
+
+@media (max-width: 646px) {
+
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .on-mobile {
+        flex-direction: column-reverse;
+        padding-top: 16px;
+    }
+
+    .on-mobile p {
+        margin-left: 0px;
+    }
+}
+
+@media(min-height:990px) {
+
+    footer {
+        width: 100%;
+        padding-bottom: 240px;
+    }
+
+}
+
+
+/***************************************************cards-media**************************************************/
+@media (min-height: 700px) {
+
+    .form-card3,
+    .form-card4,
+    .form-card7 {
+        gap: 2px;
+
+    }
+   
+} 
+@media (min-height: 740px) {
+    .form-card1
+    {
+        gap:6px
+    }
+    .form-card3,
+    .form-card4,
+    .form-card7 {
+        gap: 6px;
+
+    }
+   
+}
+
+@media (min-height: 780px) {
+   
+    .form-card3,
+    .form-card4,
+    .form-card7 {
+        gap: 10px;
+
+    }
+    .table-scroll {
+        height: 420px;
+    }
+    .car-catogeries {
+        height: 420px;
+    }
+    .scrollable-content{
+        height: 420px;
+    }
+}
+@media (min-height: 810px) {
+    .form-card1
+    {
+        gap:12px
+    }
+    .form-card3,
+    .form-card4,
+    .form-card7 {
+        gap: 12px;
+
+    }
+    .table-scroll {
+        height: 430px;
+    }
+    .car-catogeries {
+        height: 430px;
+    }
+    .scrollable-content{
+        height: 430px;
+    }
+}
+@media (min-height: 890px) {
+   
+
+    footer {
+        padding-bottom: 300px;
+    }
+
+    .form-card1
+    {
+        padding: 40px 20px 17px 12px;  
+        gap:20px
+    }
+    .form-card3,
+    .form-card4,
+    .form-card7 {
+        gap:15px
+
+    }
+    .table-scroll {
+        height: 450px;
+    }
+    .car-catogeries {
+        height: 450px;
+    }
+    .scrollable-content{
+        height: 450px;
+    }
+   
+    .content-row{
+        padding-top: 15px;
+    }
+    .title-row{
+        padding-top:10px;
+    }
+}
+@media (max-width: 991px) {
+    .space-row{
+        height: 0px;
+    }
+ 
+}
+@media (min-height: 950px) {
+  
+    .form-card1
+    {
+        gap:30px
+    }
+    .form-card3,
+    .form-card4,
+    .form-card7 {
+        gap:20px
+
+    }
+    .table-scroll {
+        height: 500px;
+    }
+    .car-catogeries {
+        height: 500px;
+    }
+    .scrollable-content{
+        height: 500px;
+    }
+   
+    .content-row{
+        padding-top: 20px;
+    }
+    .title-row{
+        padding-top:10px;
+    }
+   
+    
+}
+@media (min-width:1544px){
+    .upload__img-box{
+        width: 115px;
+        height: 115px;
+    }
+    .upload-container-checking{
+        width: 115px;
+        height: 115px;
+    }
+    .CurrentReadingg_row{
+        padding-bottom: 3rem;
+       
+   }
+   
+}
