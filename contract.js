@@ -280,74 +280,101 @@ document.addEventListener('DOMContentLoaded', function () {
 function OpenHandSignPopup() {
 	// Hide the second popup modal
 	$('#signaturePopupModal').modal('hide');
-
+  
 	// Open the third popup modal
 	$('#handsignatureModal').modal('show');
-
-
-}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-ctx.lineWidth = 4; 
-
-// Variables for drawing 
-var drawing = false;
-var prevX = 0;
-var prevY = 0;
-var currX = 0;
-var currY = 0;
-
-// Draw a line between the previous point and the current point
-function drawLine(x0, y0, x1, y1) {
-  ctx.beginPath();
-  ctx.moveTo(x0, y0);
-  ctx.lineTo(x1, y1);
-  ctx.stroke();
-  ctx.closePath();
-}
-
-// Add event listeners to handle mouse events
-canvas.addEventListener('mousedown', function (e) {
-  drawing = true;
-  prevX = e.clientX - canvas.getBoundingClientRect().left;
-  prevY = e.clientY - canvas.getBoundingClientRect().top;
-});
-
-canvas.addEventListener('mousemove', function (e) {
-  if (!drawing) return;
-  currX = e.clientX - canvas.getBoundingClientRect().left;
-  currY = e.clientY - canvas.getBoundingClientRect().top;
+  }
   
-  drawLine(prevX, prevY, currX, currY);
-  prevX = currX;
-  prevY = currY;
-});
-
-canvas.addEventListener('mouseup', function () {
-  drawing = false;
-});
-
-// Clear the canvas
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-document.getElementById('clear').addEventListener('click', function () {
-  clearCanvas();
-});
-
-// Save the canvas as an image
-function saveCanvas() {
-  var dataURL = canvas.toDataURL();
-  var link = document.createElement('a');
-  link.href = dataURL;
-  console.log(link.href);
-}
-
-document.getElementById('save').addEventListener('click', function () {
-  saveCanvas();
-  $('#handsignatureModal').modal('hide');
-});
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  ctx.lineWidth = 4; 
+  
+  // Variables for drawing 
+  var drawing = false;
+  var prevX = 0;
+  var prevY = 0;
+  var currX = 0;
+  var currY = 0;
+  
+  // Draw a line between the previous point and the current point
+  function drawLine(x0, y0, x1, y1) {
+	ctx.beginPath();
+	ctx.moveTo(x0, y0);
+	ctx.lineTo(x1, y1);
+	ctx.stroke();
+	ctx.closePath();
+  }
+  
+  // Add event listeners to handle mouse and touch events
+  canvas.addEventListener('mousedown', handleMouseDown, false);
+  canvas.addEventListener('mousemove', handleMouseMove, false);
+  canvas.addEventListener('mouseup', handleMouseUp, false);
+  
+  canvas.addEventListener('touchstart', handleTouchStart, false);
+  canvas.addEventListener('touchmove', handleTouchMove, false);
+  canvas.addEventListener('touchend', handleTouchEnd, false);
+  
+  function handleMouseDown(e) {
+	drawing = true;
+	prevX = e.clientX - canvas.getBoundingClientRect().left;
+	prevY = e.clientY - canvas.getBoundingClientRect().top;
+  }
+  
+  function handleMouseMove(e) {
+	if (!drawing) return;
+	currX = e.clientX - canvas.getBoundingClientRect().left;
+	currY = e.clientY - canvas.getBoundingClientRect().top;
+	
+	drawLine(prevX, prevY, currX, currY);
+	prevX = currX;
+	prevY = currY;
+  }
+  
+  function handleMouseUp() {
+	drawing = false;
+  }
+  
+  function handleTouchStart(e) {
+	drawing = true;
+	prevX = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+	prevY = e.touches[0].clientY - canvas.getBoundingClientRect().top;
+  }
+  
+  function handleTouchMove(e) {
+	if (!drawing) return;
+	currX = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+	currY = e.touches[0].clientY - canvas.getBoundingClientRect().top;
+	
+	drawLine(prevX, prevY, currX, currY);
+	prevX = currX;
+	prevY = currY;
+  }
+  
+  function handleTouchEnd() {
+	drawing = false;
+  }
+  
+  // Clear the canvas
+  function clearCanvas() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  
+  document.getElementById('clear').addEventListener('click', function () {
+	clearCanvas();
+  });
+  
+  // Save the canvas as an image
+  function saveCanvas() {
+	var dataURL = canvas.toDataURL();
+	var link = document.createElement('a');
+	link.href = dataURL;
+	console.log(link.href);
+  }
+  
+  document.getElementById('save').addEventListener('click', function () {
+	saveCanvas();
+	$('#handsignatureModal').modal('hide');
+  });
 // /////////////////
 function OpenPicSignPopup() {
 	// Hide the second popup modal
